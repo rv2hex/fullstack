@@ -2,7 +2,7 @@
   <img src="./banner.svg" alt="CYBERNETICS banner" width="100%" />
 </div>
 
-# CYBERNETICS — chrome market
+<h1><a href="https://rv2hex.github.io/fullstack/" target="_blank">CYBERNETICS — chrome market</a></h1>
 
 A static cyberpunk buy/sell storefront. Three corp catalogs (Arasaka,
 Militech, Zetatech), cart, mock login, mock checkout — **no backend**,
