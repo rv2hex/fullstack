@@ -1,8 +1,15 @@
+<div align="center">
+  <img src="./banner.svg" alt="CYBERNETICS banner" width="100%" />
+</div>
+
 # CYBERNETICS — chrome market
 
 A static cyberpunk buy/sell storefront. Three corp catalogs (Arasaka,
 Militech, Zetatech), cart, mock login, mock checkout — **no backend**,
 everything persists in `localStorage`. Open it and shop.
+
+![home](docs/home.png)
+![catalog](docs/catalog.png)
 
 ## Run
 
