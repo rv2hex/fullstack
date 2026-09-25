@@ -82,3 +82,34 @@ button, input{
   border: 3px solid #1F51FF;
   padding: 10px;
 }
+
+/* CYBERNETICS market additions */
+.wrap{ max-width: 1000px; margin: 0 auto; padding: 1.5em; }
+.corp-head{ border: 1px solid #FFFF00; padding: 1em; margin-bottom: 1.5em; }
+.corp-head h1{ font-family: "Rubik Glitch", system-ui; margin: 0 0 .3em; }
+.corp-head p{ color: #FFFF00; margin: 0; }
+.grid{ display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 1em; }
+.card{ border: 1px solid #FFFF00; padding: 1em; background: rgba(0,0,0,.85); }
+.card:hover{ border-color: #FF3131; }
+.card-corp{ font-size: .8em; color: #FF3131; letter-spacing: 2px; }
+.card-name{ font-size: 1.2em; font-weight: bold; color: #fff; margin: .3em 0; }
+.card-blurb{ font-size: .9em; color: #FFFF00; min-height: 3em; }
+.card-row{ display: flex; justify-content: space-between; align-items: center; margin-top: .8em; }
+.card-price{ font-weight: bold; }
+.card button{ height: auto; font-size: 1em; padding: .3em 1em; }
+.badge{ display: inline-block; min-width: 1.5em; background: #FF3131; color: #000; border-radius: 1em; font-weight: bold; }
+table.cart{ width: 100%; border-collapse: collapse; margin: 1em 0; }
+table.cart th, table.cart td{ border: 1px solid #FFFF00; padding: .5em; text-align: left; }
+table.cart th{ color: #FF3131; }
+.qty button{ height: auto; font-size: 1em; padding: 0 .5em; margin: 0 .2em; }
+.total-line{ font-size: 1.4em; font-weight: bold; text-align: right; margin: 1em 0; }
+.form label{ display: block; margin: .8em 0 .3em; color: #FFFF00; }
+.form input, .form select{ width: 100%; max-width: 420px; box-sizing: border-box; height: 2.5em; font-size: 1em; }
+.form button{ margin-top: 1em; }
+#toast{ position: fixed; bottom: 1.5em; left: 50%; transform: translateX(-50%); background: #FFFF00; color: #000; font-weight: bold; padding: .7em 1.5em; opacity: 0; transition: opacity .3s; z-index: 99; pointer-events: none; }
+#toast.show{ opacity: 1; }
+.confirm{ border: 3px solid #1F51FF; padding: 1.5em; margin-top: 1em; color: #fff; }
+.confirm h2{ color: #FFFF00; margin-top: 0; }
+.footer{ text-align: center; padding: 2em 1em; color: #FFFF00; font-size: .9em; }
+.tabs button{ background: transparent; }
+.tabs button.active{ background: #FFFF00; color: #000; }

@@ -1,0 +1,94 @@
+<html>
+<head>
+	<title>CART — CYBERNETICS</title>
+	<link rel="stylesheet" href="styles.css">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Play:wght@400;700&family=Rubik+Glitch&display=swap" rel="stylesheet">
+	<script src="script.js"></script>
+</head>
+<body>
+<div class="nav">
+<a href="index.html">CYBERNETICS</a>
+<a class="items" href="Arasaka.html">Arasaka</a>
+<a class="items" href="Militech.html">Militech</a>
+<a class="items" href="Zetatech.html">Zetatech</a>
+<a class="items" href="cart.html">CART [<span data-cart-badge>0</span>]</a>
+<a class="items" data-auth-link href="login.html">LOGIN</a>
+</div>
+
+<div class="wrap form">
+	<h1>YOUR HAUL</h1>
+	<p id="whoami"></p>
+	<div id="cart-body"></div>
+
+	<div id="checkout" style="display:none;">
+		<h2>DROP DETAILS</h2>
+		<label for="co-name">Drop name:</label>
+		<input type="text" id="co-name" placeholder="e.g. V">
+		<label for="co-district">District:</label>
+		<input type="text" id="co-district" placeholder="e.g. Watson">
+		<label for="co-pay">Payment:</label>
+		<select id="co-pay">
+			<option>Eddies (cash)</option>
+			<option>Corp account</option>
+			<option>Favor owed</option>
+		</select>
+		<br><button onclick="doCheckout()">CONFIRM PURCHASE</button>
+	</div>
+
+	<div id="done"></div>
+	<p><a href="index.html" style="color:#FF3131;">← keep shopping</a></p>
+</div>
+
+<script>
+function renderCartPage() {
+  const cart = getCart();
+  const ids = Object.keys(cart);
+  const body = document.getElementById("cart-body");
+  const co = document.getElementById("checkout");
+  if (!ids.length) {
+    body.innerHTML = "<p>Cart is empty. The grid provides — <a href='Arasaka.html' style='color:#FF3131;'>go browse</a>.</p>";
+    co.style.display = "none";
+    return;
+  }
+  let rows = ids.map((id) => {
+    const p = PRODUCTS.find((x) => x.id === id);
+    if (!p) return "";
+    return `<tr>
+      <td>${p.name}<br><small>${CORPS[p.corp].name}</small></td>
+      <td>${eddies(p.price)}</td>
+      <td class="qty"><button onclick="setQty('${id}', ${cart[id] - 1})">−</button>${cart[id]}<button onclick="setQty('${id}', ${cart[id] + 1})">+</button></td>
+      <td>${eddies(p.price * cart[id])}</td>
+      <td><button onclick="setQty('${id}', 0)">DROP</button></td>
+    </tr>`;
+  }).join("");
+  body.innerHTML = `<table class="cart">
+    <tr><th>Chrome</th><th>Price</th><th>Qty</th><th>Sub</th><th></th></tr>${rows}
+  </table><div class="total-line">TOTAL: ${eddies(cartTotal())}</div>`;
+  co.style.display = "";
+}
+function doCheckout() {
+  const res = checkout(
+    document.getElementById("co-name").value,
+    document.getElementById("co-district").value,
+    document.getElementById("co-pay").value
+  );
+  if (typeof res === "string") { toast(res); return; }
+  document.getElementById("cart-body").innerHTML = "";
+  document.getElementById("checkout").style.display = "none";
+  document.getElementById("done").innerHTML = `<div class="confirm">
+    <h2>DEAL SEALED — ${res.id}</h2>
+    <p>Fixer confirms: ${eddies(res.total)} to <b>${res.name}</b> in ${res.district}, paid in ${res.pay}.</p>
+    <p>Ripperdoc appointment booked. Don't be late, ${res.by}.</p>
+  </div>`;
+  renderCartPage();
+  document.getElementById("cart-body").innerHTML = "";
+  document.getElementById("checkout").style.display = "none";
+  refreshBadge();
+}
+document.addEventListener("DOMContentLoaded", renderCartPage);
+</script>
+
+</body>
+</html>

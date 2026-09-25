@@ -1,6 +1,6 @@
 <html>
 <head>
-	<title>LOGIN</title>
+	<title>LOGIN — CYBERNETICS</title>
 	<link rel="stylesheet" href="styles.css">
 	<!--glich & play google font-->
 	<link rel="preconnect" href="https://fonts.googleapis.com">
@@ -9,16 +9,70 @@
 	<script src="script.js"></script>
 </head>
 <body>
+<div class="nav">
+<a href="index.html">CYBERNETICS</a>
+<a class="items" href="Arasaka.html">Arasaka</a>
+<a class="items" href="Militech.html">Militech</a>
+<a class="items" href="Zetatech.html">Zetatech</a>
+<a class="items" href="cart.html">CART [<span data-cart-badge>0</span>]</a>
+<a class="items" data-auth-link href="login.html">LOGIN</a>
+</div>
+
+<div class="wrap form">
 	<h1>Secure Access Required</h1>
-	<h3>Enter your credentials to unlock cutting-edge technology, personalized recommendations, and exclusive offers.<h3>
-	
-<div class="login">
-    <label for="username">Username:</label>
-    <input type="text" id="username" name="username">
-<p></p>
-    <label for="pass">Password:</label>
-    <input type="password" id="pass" name="password" minlength="8" required="">
-<input type="submit" value="Sign in" onclick="window.location.href = 'index.html';">
-</div>	
+	<h3>Enter your credentials to unlock cutting-edge technology, personalized recommendations, and exclusive offers.</h3>
+	<p id="whoami"></p>
+
+	<div class="tabs">
+		<button id="tab-login" class="active" onclick="showTab('login')">Sign in</button>
+		<button id="tab-reg" onclick="showTab('reg')">Register</button>
+	</div>
+
+	<div id="pane-login">
+		<label for="username">Username:</label>
+		<input type="text" id="username" name="username">
+		<label for="pass">Password:</label>
+		<input type="password" id="pass" name="password" minlength="8" required="">
+		<br><button onclick="doLogin()">Sign in</button>
+	</div>
+
+	<div id="pane-reg" style="display:none;">
+		<label for="reg-user">Handle (min 3 chars):</label>
+		<input type="text" id="reg-user" name="reg-user">
+		<label for="reg-pass">Password (min 8 chars):</label>
+		<input type="password" id="reg-pass" name="reg-pass" minlength="8" required="">
+		<br><button onclick="doRegister()">Create identity</button>
+	</div>
+
+	<p><a href="index.html" style="color:#FF3131;">← back to the market</a></p>
+</div>
+
+<script>
+function showTab(which) {
+  document.getElementById("pane-login").style.display = which === "login" ? "" : "none";
+  document.getElementById("pane-reg").style.display = which === "reg" ? "" : "none";
+  document.getElementById("tab-login").classList.toggle("active", which === "login");
+  document.getElementById("tab-reg").classList.toggle("active", which === "reg");
+}
+function doLogin() {
+  const err = login(
+    document.getElementById("username").value,
+    document.getElementById("pass").value
+  );
+  if (err) { toast(err); return; }
+  toast("Jacked in. Welcome back.");
+  setTimeout(() => { window.location.href = "index.html"; }, 800);
+}
+function doRegister() {
+  const err = register(
+    document.getElementById("reg-user").value,
+    document.getElementById("reg-pass").value
+  );
+  if (err) { toast(err); return; }
+  toast("Identity forged. Welcome to the grid.");
+  setTimeout(() => { window.location.href = "index.html"; }, 800);
+}
+</script>
+
 </body>
 </html>
